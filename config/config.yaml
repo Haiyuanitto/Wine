@@ -1,0 +1,68 @@
+# 勃艮第名庄（可自行增删）
+famous_producers:
+  - Domaine de la Romanee-Conti
+  - Domaine Leroy
+  - Armand Rousseau
+  - Emmanuel Rouget
+  - Domaine Leflaive
+  - Rene Engel
+  - Domaine Meo-Camuzet
+  - Arnaud Ente
+  - Domaine d'Auvenay
+  - Comte Liger-Belair
+  - Comtes Lafon
+  - Roumier
+
+# 搜索关键词（用于增强勃艮第筛选）
+keywords:
+  - Burgundy
+  - Bourgogne
+  - Cote de Nuits
+  - Cote de Beaune
+  - Gevrey-Chambertin
+  - Vosne-Romanee
+  - Chambolle-Musigny
+  - Puligny-Montrachet
+
+# 可留空：为空时会按 famous_producers 自动拼接 query
+queries:
+  - Domaine de la Romanee-Conti burgundy
+  - Domaine Leroy burgundy
+  - Armand Rousseau burgundy
+  - Emmanuel Rouget burgundy
+  - Domaine Leflaive burgundy
+  - Rene Engel burgundy
+  - Domaine Meo-Camuzet burgundy
+  - Arnaud Ente burgundy
+  - Domaine d'Auvenay burgundy
+  - Comte Liger-Belair burgundy
+  - Comte Liger Belair burgundy
+  - Comtes Lafon burgundy
+  - Domaine des Comtes Lafon burgundy
+  - Roumier burgundy
+  - Domaine Georges Roumier burgundy
+
+# 名称排除（命中则不纳入比价）
+exclude_name_patterns:
+  - Maison Leroy
+
+# 只保留高于该阈值的折扣（例如 0.08 = 至少低 8%）
+min_saving_pct: 0.05
+
+# 抓取超时（秒）
+timeout_sec: 25
+
+# 货币换算为 HKD 的汇率（手动维护）
+fx_to_hkd:
+  HKD: 1.0
+  USD: 7.8
+  EUR: 8.4
+  GBP: 9.9
+  JPY: 0.052
+  CNY: 1.08
+  AUD: 5.1
+  CAD: 5.7
+  CHF: 8.8
+  SGD: 5.8
+
+output_dir: output

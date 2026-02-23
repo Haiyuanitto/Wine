@@ -1,0 +1,49 @@
+name: Wine Searcher Cloud Runner
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Every 6 hours (UTC)
+    - cron: "0 */6 * * *"
+
+jobs:
+  run-search:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Prepare config
+        shell: bash
+        run: |
+          mkdir -p config
+          if [ -n "${{ secrets.WINE_CONFIG_YAML }}" ]; then
+            printf '%s' "${{ secrets.WINE_CONFIG_YAML }}" > config/config.yaml
+          elif [ -f config/config.yaml ]; then
+            echo "Using repo config/config.yaml"
+          else
+            cp config/config.example.yaml config/config.yaml
+          fi
+
+      - name: Run scanner
+        run: python wine_searcher_bot.py --config config/config.yaml
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wine-searcher-reports-${{ github.run_number }}
+          path: output/
+          if-no-files-found: warn
