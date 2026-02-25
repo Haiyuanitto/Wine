@@ -2,6 +2,9 @@ name: Wine Searcher Cloud Runner
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
   schedule:
     # Every 6 hours (UTC)
     - cron: "0 */6 * * *"
